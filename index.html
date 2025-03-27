@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceCraft | Audio Processing Suite</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-container">
+                <img src="assets/logo.svg" alt="VoiceCraft Logo" class="logo">
+                <h1>VoiceCraft</h1>
+            </div>
+            <p class="tagline">Transform, Transcribe, and Clone Voices with AI</p>
+        </header>
+
+        <main>
+            <div class="workflow-container">
+                <div class="workflow-steps">
+                    <div class="step active" data-step="upload">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Upload Audio</div>
+                    </div>
+                    <div class="step" data-step="process">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Noise Reduction</div>
+                    </div>
+                    <div class="step" data-step="transcribe">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Transcribe</div>
+                    </div>
+                    <div class="step" data-step="clone">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Voice Cloning</div>
+                    </div>
+                </div>
+
+                <div class="workflow-content">
+                    <!-- Step 1: Upload -->
+                    <div class="step-content active" id="upload-content">
+                        <h2>Upload Your Audio File</h2>
+                        <div class="upload-area" id="upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop your audio file here or</p>
+                            <label for="audio-upload" class="upload-btn">Choose File</label>
+                            <input type="file" id="audio-upload" accept="audio/*" hidden>
+                            <p class="file-info">Supported formats: MP3, WAV, M4A, FLAC</p>
+                        </div>
+                        <div class="uploaded-file-info hidden" id="uploaded-file-info">
+                            <div class="file-preview">
+                                <i class="fas fa-file-audio"></i>
+                                <div class="file-details">
+                                    <p class="file-name" id="file-name">filename.mp3</p>
+                                    <p class="file-size" id="file-size">0 MB</p>
+                                </div>
+                            </div>
+                            <button class="next-btn" id="upload-next">Continue to Noise Reduction</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Process -->
+                    <div class="step-content" id="process-content">
+                        <h2>Noise Reduction</h2>
+                        <div class="process-options">
+                            <div class="option-card">
+                                <div class="option-header">
+                                    <i class="fas fa-filter"></i>
+                                    <h3>Apply Noise Reduction</h3>
+                                </div>
+                                <p>Clean up background noise and enhance voice clarity</p>
+                                <div class="toggle-container">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="noise-reduction-toggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="audio-preview">
+                                <h3>Audio Preview</h3>
+                                <div class="waveform" id="waveform">
+                                    <div class="waveform-placeholder">
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                    </div>
+                                </div>
+                                <div class="audio-controls">
+                                    <button class="control-btn" id="play-btn">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <div class="progress-bar">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <span class="time">00:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="back-btn" id="process-back">Back</button>
+                            <button class="next-btn" id="process-next">Process Audio</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Transcribe -->
+                    <div class="step-content" id="transcribe-content">
+                        <h2>Transcribe Audio</h2>
+                        <div class="transcribe-container">
+                            <div class="transcribe-info">
+                                <i class="fas fa-language"></i>
+                                <p>Convert your audio to text using advanced AI speech recognition</p>
+                            </div>
+                            
+                            <div class="transcription-result" id="transcription-result">
+                                <div class="transcription-placeholder">
+                                    <div class="placeholder-line"></div>
+                                    <div class="placeholder-line"></div>
+                                    <div class="placeholder-line"></div>
+                                    <div class="placeholder-line"></div>
+                                    <div class="placeholder-line"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="transcription-actions">
+                                <button class="action-btn" id="copy-transcription">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                                <button class="action-btn" id="download-transcription">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button class="action-btn" id="edit-transcription">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="back-btn" id="transcribe-back">Back</button>
+                            <button class="next-btn" id="transcribe-next">Continue to Voice Cloning</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Clone -->
+                    <div class="step-content" id="clone-content">
+                        <h2>Voice Cloning</h2>
+                        <div class="clone-container">
+                            <div class="clone-info">
+                                <i class="fas fa-microphone-alt"></i>
+                                <p>Generate new audio with the voice from your uploaded file</p>
+                            </div>
+                            
+                            <div class="clone-input">
+                                <h3>Enter text to generate with cloned voice</h3>
+                                <textarea id="clone-text" placeholder="Type or paste the text you want to generate with the cloned voice...">I am excited to explore new opportunities in the field of machine learning and natural language processing.</textarea>
+                            </div>
+                            
+                            <div class="clone-result hidden" id="clone-result">
+                                <h3>Generated Audio</h3>
+                                <div class="waveform" id="clone-waveform">
+                                    <div class="waveform-placeholder">
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                    </div>
+                                </div>
+                                <div class="audio-controls">
+                                    <button class="control-btn" id="clone-play-btn">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <div class="progress-bar">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <span class="time">00:00</span>
+                                </div>
+                                <button class="action-btn" id="download-clone">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="back-btn" id="clone-back">Back</button>
+                            <button class="next-btn" id="generate-clone">Generate Voice</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2023 VoiceCraft. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal" id="processing-modal">
+        <div class="modal-content">
+            <div class="spinner"></div>
+            <h3 id="modal-message">Processing your audio...</h3>
+            <p id="modal-description">This may take a few moments</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
